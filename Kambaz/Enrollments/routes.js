@@ -4,9 +4,9 @@ export default function EnrollmentsRoutes(app, db) {
     const dao = EnrollmentsDao(db);
 
     const enrollUserInCourse = (req, res) => {
-        const { courseID } = req.params;
+        const { courseId } = req.params;
         const { userId } = req.body;
-        const newEnrollment = dao.enrollUserInCourse(userId, courseID);
+        const newEnrollment = dao.enrollUserInCourse(userId, courseId);
         res.send(newEnrollment);
     }
 
