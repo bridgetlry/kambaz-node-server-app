@@ -10,7 +10,10 @@ import cors from "cors"
 import ModulesRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentsRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentsRoutes from "./Kambaz/Enrollments/routes.js";
+import mongoose from "mongoose";
 const app = express();
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz-fa25-wed"
+mongoose.connect(CONNECTION_STRING);
 
 app.use(cors({
     credentials: true,
@@ -37,7 +40,7 @@ app.use(express.json());
 
 Lab5(app);
 Hello(app);
-UserRoutes(app, db);
+UserRoutes(app);
 CourseRoutes(app, db);
 ModulesRoutes(app, db);
 AssignmentsRoutes(app, db);
