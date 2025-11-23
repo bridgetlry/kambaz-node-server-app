@@ -11,11 +11,26 @@ export default function EnrollmentsRoutes(app, db) {
     }
 
     const unenrollUserInCourse = (req, res) => {
-        const { courseID, userId } = req.params;
-        const status = dao.unenrollUserInCourse(userId, courseID);
+        const { courseId, userId } = req.params;
+        const status = dao.unenrollUserFromCourse(userId, courseId);
         res.send(status);
     }
 
+    const fetchEnrollments = async (req, res) => {
+        let { userId } = req.params;
+        if (userId === "current") {
+            const currentUser = req.session["currentUser"];
+            if (!currentUser) {
+                res.sendStatus(401);
+                return;
+            }
+            userId = currentUser._id;
+        }
+        const enrollments = await dao.fetchEnrollments(userId);
+        res.json(enrollments);
+    };
+
     app.post("/api/courses/:courseId/enrollments", enrollUserInCourse);
     app.delete("/api/courses/:courseId/enrollments/:userId", unenrollUserInCourse);
+    app.get("/api/users/:userId/enrollments", fetchEnrollments);
 }
