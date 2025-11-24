@@ -12,7 +12,7 @@ import AssignmentsRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentsRoutes from "./Kambaz/Enrollments/routes.js";
 import mongoose from "mongoose";
 const app = express();
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz-fa25-wed"
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb+srv://bridgetlry:gotasecret@kambaz.tw0ek8t.mongodb.net/"
 mongoose.connect(CONNECTION_STRING);
 
 app.use(cors({
