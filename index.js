@@ -12,7 +12,7 @@ import AssignmentsRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentsRoutes from "./Kambaz/Enrollments/routes.js";
 import mongoose from "mongoose";
 const app = express();
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb+srv://bridgetlry:gotasecret@kambaz.tw0ek8t.mongodb.net/"
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz-fa25-wed";
 mongoose.connect(CONNECTION_STRING);
 
 app.use(cors({
@@ -20,7 +20,6 @@ app.use(cors({
     origin: process.env.CLIENT_URL || "http://localhost:3000",
 }
 ));
-// app.set('trust proxy',1);
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
