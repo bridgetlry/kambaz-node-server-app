@@ -39,8 +39,17 @@ async function updateModule(courseId, moduleId, moduleUpdates) {
   return module;
 }
 
+ async function saveYouTubeVideoToLesson(cid, mid, lid, vid) {
+   const course = await model.findById(cid);
+   const module = course.modules.id(mid);
+   const lesson = module.lessons.id(lid);
+   lesson.youTubeId = vid;
+   await course.save();
+   return lesson;
+ }
 
  return {
+   saveYouTubeVideoToLesson,
    findModulesForCourse,
    createModule,
    deleteModule,
