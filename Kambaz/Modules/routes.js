@@ -1,7 +1,7 @@
 import ModulesDao from "../Modules/dao.js";
 export default function ModulesRoutes(app, db) {
     const dao = ModulesDao(db);
-    
+
     const findModulesForCourse = async (req, res) => {
         const { courseId } = req.params;
         const modules = await dao.findModulesForCourse(courseId);
@@ -30,8 +30,21 @@ export default function ModulesRoutes(app, db) {
         res.send(status);
     }
 
+    const saveYouTubeVideoToLesson = async (req, res) => {
+        const { cid, mid, lid, vid } = req.params;
+        const status = await dao
+            .saveYouTubeVideoToLesson(cid, mid, lid, vid);
+        res.send(status);
+    };
+
+
     app.get("/api/courses/:courseId/modules", findModulesForCourse);
     app.post("/api/courses/:courseId/modules", createModuleForCourse);
     app.delete("/api/courses/:courseId/modules/:moduleId", deleteModule);
     app.put("/api/courses/:courseId/modules/:moduleId", updateModule);
+    app.post(
+        "/api/courses/:cid/modules/:mid/lessons/:lid/youtube/:vid",
+        saveYouTubeVideoToLesson
+    );
+
 }
